@@ -1,0 +1,25 @@
+[
+    {
+        "namn": "Köttbulle Diamant",
+        "kategori": "kött",
+        "ingredienser":
+        [
+            {
+                "namn": "bas",
+                "ingredienser":
+                [
+                    {"namn": "köttbullar", "mått": 10, "enhet": "st"},
+                    {"namn": "diamanter", "mått": 500, "enhet": "g"}
+                ]
+            },
+            {
+                "namn": "variant 1",
+                "ingredienser":
+                [
+                    {"namn": "tjuvar", "mått": 2, "enhet": "st"},
+                    {"namn": "poliser", "mått": 5, "enhet": "st"}
+                ]
+            }
+        ]
+    }
+]

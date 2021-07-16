@@ -2,7 +2,7 @@
 var recipes = []
 
 // Load the recipes from the JSON file and do the first update of the recipe list.
-d3.json("/data.json", data => { recipes = data; updateRecipeList(); })
+d3.json("data.json", data => { recipes = data; updateRecipeList(); })
 
 // Add new recipes and remove the old ones, according to filtering.
 const updateRecipeList = function() {

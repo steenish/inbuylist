@@ -1,6 +1,24 @@
 // Global data array of recipes.
 var recipes = []
 
+// Global data array of ingredients in the shopping list.
+var shoppingList = []
+
+// Global unit conversion table.
+const unitConverter = {
+    g: [
+        { unit: "kg", lowerLimit: 1000 },
+        { unit: "g", lowerLimit: 1}
+    ],
+    ml: [
+        { unit: "l", lowerLimit: 1000},
+        { unit: "dl", lowerLimit: 100},
+        { unit: "msk", lowerLimit: 15},
+        { unit: "tsk", lowerLimit: 5},
+        { unit: "krm", lowerLimit: 1}
+    ]
+}
+
 // Load the recipes from the JSON file and do the first update of the recipe list.
 d3.json("data.json", data => { recipes = data; updateRecipeList(); })
 
@@ -73,13 +91,15 @@ const addIngredients = function() {
     // The ingredients from the recipe part.
     let ingredients = d3.select(this).datum().ingredienser
 
-    // TODO: Make global shopping list variable to hold all added ingredients, then add the newly added ingredients to that variable gracefully, then do the d3 data join stuff.
+    // Merge the new ingredients into the existing shopping list.
+    mergeIngredients(ingredients)
 
-    // TODO: This is temporary, see TODO above.
+    // Update the visuals.
     let shoppingListUpdate = d3
         .select("#shoppingList")
         .selectAll("li")
-        .data(ingredients)
+        .data(shoppingList)
+        .text(formatIngredient)
 
     let shoppingListEnter = shoppingListUpdate
         .enter()
@@ -87,7 +107,43 @@ const addIngredients = function() {
         .text(formatIngredient)
 }
 
-// TODO: Implement nice formatting for ingredients.
 const formatIngredient = function(ingredient) {
-    return ingredient.namn
+    if (ingredient.enhet in unitConverter) {
+        let amountUnit = ""
+        const units = unitConverter[ingredient.enhet]
+
+        let currentAmount = ingredient.mått
+        units.forEach(unit => {
+            const fraction = currentAmount / unit.lowerLimit
+            if (fraction >= 1) {
+                const whole = Math.floor(fraction)
+                currentAmount -= whole * unit.lowerLimit
+                amountUnit += `${whole} ${unit.unit} `
+            }
+        });
+
+        if (currentAmount === ingredient.mått) {
+            amountUnit = `${ingredient.mått} ${ingredient.enhet} `
+        }
+
+        return `${amountUnit}${ingredient.namn}`
+    } else {
+        return `${ingredient.mått} ${ingredient.enhet} ${ingredient.namn}`
+    }
+}
+
+const mergeIngredients = function(newIngredients) {
+    newIngredients.forEach(newIngredient => {
+        let neverFound = true
+        shoppingList.forEach(oldIngredient => {
+            if (neverFound && newIngredient.namn === oldIngredient.namn && newIngredient.enhet === oldIngredient.enhet) {
+                oldIngredient.mått += newIngredient.mått
+                neverFound = false
+            }
+        })
+
+        if (neverFound) {
+            shoppingList.push({namn: newIngredient.namn, mått: newIngredient.mått, enhet: newIngredient.enhet})
+        }
+    })
 }

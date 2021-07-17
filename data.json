@@ -9,7 +9,8 @@
                 "ingredienser":
                 [
                     {"namn": "köttbullar", "mått": 10, "enhet": "st"},
-                    {"namn": "diamanter", "mått": 500, "enhet": "g"}
+                    {"namn": "diamanter", "mått": 500, "enhet": "g"},
+                    {"namn": "humor", "mått": 3, "enhet": "ml"}
                 ]
             },
             {

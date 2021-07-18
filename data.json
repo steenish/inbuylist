@@ -1,24 +1,24 @@
 [
     {
-        "namn": "Köttbulle Diamant",
-        "kategori": "kött",
-        "ingredienser":
+        "name": "Köttbulle Diamant",
+        "category": "kött",
+        "ingredients":
         [
             {
-                "namn": "bas",
-                "ingredienser":
+                "name": "bas",
+                "ingredients":
                 [
-                    {"namn": "köttbullar", "mått": 10, "enhet": "st"},
-                    {"namn": "diamanter", "mått": 500, "enhet": "g"},
-                    {"namn": "humor", "mått": 3, "enhet": "ml"}
+                    {"name": "köttbullar", "amount": 10, "unit": "st"},
+                    {"name": "diamanter", "amount": 500, "unit": "g"},
+                    {"name": "humor", "amount": 3, "unit": "ml"}
                 ]
             },
             {
-                "namn": "variant 1",
-                "ingredienser":
+                "name": "variant 1",
+                "ingredients":
                 [
-                    {"namn": "tjuvar", "mått": 2, "enhet": "st"},
-                    {"namn": "poliser", "mått": 5, "enhet": "st"}
+                    {"name": "tjuvar", "amount": 2, "unit": "st"},
+                    {"name": "poliser", "amount": 5, "unit": "st"}
                 ]
             }
         ]

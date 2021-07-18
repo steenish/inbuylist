@@ -32,7 +32,7 @@ const updateRecipeList = function() {
     let recipeEnter = recipeUpdate
         .enter()
         .append("li")
-        .text(d => d.namn)
+        .text(d => d.name)
         .on("click", openRecipe)
 
     let recipeExit = recipeUpdate
@@ -55,7 +55,7 @@ const openRecipe = function() {
     let recipePartUpdate = d3
         .select("#recipeIngredients")
         .selectAll(".recipePart")
-        .data(recipe.ingredienser)
+        .data(recipe.ingredients)
 
     let recipePartEnter = recipePartUpdate
         .enter()
@@ -68,7 +68,7 @@ const openRecipe = function() {
     recipePartHeaders
         .append("p")
         .classed("recipePartTitle", true)
-        .text(d => d.namn)
+        .text(d => d.name)
         
     recipePartHeaders
         .append("button")
@@ -81,7 +81,7 @@ const openRecipe = function() {
         .append("ul")
             .classed("recipePart", true)
             .selectAll("li")
-                .data(d => d.ingredienser)
+                .data(d => d.ingredients)
                 .enter()
                 .append("li")
                 .text(formatIngredient)
@@ -89,7 +89,7 @@ const openRecipe = function() {
 
 const addIngredients = function() {
     // The ingredients from the recipe part.
-    let ingredients = d3.select(this).datum().ingredienser
+    let ingredients = d3.select(this).datum().ingredients
 
     // Merge the new ingredients into the existing shopping list.
     mergeIngredients(ingredients)
@@ -108,11 +108,11 @@ const addIngredients = function() {
 }
 
 const formatIngredient = function(ingredient) {
-    if (ingredient.enhet in unitConverter) {
+    if (ingredient.unit in unitConverter) {
         let amountUnit = ""
-        const units = unitConverter[ingredient.enhet]
+        const units = unitConverter[ingredient.unit]
 
-        let currentAmount = ingredient.mått
+        let currentAmount = ingredient.amount
         units.forEach(unit => {
             const fraction = currentAmount / unit.lowerLimit
             if (fraction >= 1) {
@@ -122,13 +122,13 @@ const formatIngredient = function(ingredient) {
             }
         });
 
-        if (currentAmount === ingredient.mått) {
-            amountUnit = `${ingredient.mått} ${ingredient.enhet} `
+        if (currentAmount === ingredient.amount) {
+            amountUnit = `${ingredient.amount} ${ingredient.unit} `
         }
 
-        return `${amountUnit}${ingredient.namn}`
+        return `${amountUnit}${ingredient.name}`
     } else {
-        return `${ingredient.mått} ${ingredient.enhet} ${ingredient.namn}`
+        return `${ingredient.amount} ${ingredient.unit} ${ingredient.name}`
     }
 }
 
@@ -136,14 +136,14 @@ const mergeIngredients = function(newIngredients) {
     newIngredients.forEach(newIngredient => {
         let neverFound = true
         shoppingList.forEach(oldIngredient => {
-            if (neverFound && newIngredient.namn === oldIngredient.namn && newIngredient.enhet === oldIngredient.enhet) {
-                oldIngredient.mått += newIngredient.mått
+            if (neverFound && newIngredient.name === oldIngredient.name && newIngredient.unit === oldIngredient.unit) {
+                oldIngredient.amount += newIngredient.amount
                 neverFound = false
             }
         })
 
         if (neverFound) {
-            shoppingList.push({namn: newIngredient.namn, mått: newIngredient.mått, enhet: newIngredient.enhet})
+            shoppingList.push({name: newIngredient.name, amount: newIngredient.amount, unit: newIngredient.unit})
         }
     })
 }

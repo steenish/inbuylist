@@ -124,6 +124,10 @@ const formatIngredient = function(ingredient) {
 
         if (currentAmount === ingredient.amount) {
             amountUnit = `${ingredient.amount} ${ingredient.unit} `
+        } else {
+            console.log(ingredient)
+            console.log(currentAmount)
+            amountUnit += `(${ingredient.amount} ${ingredient.unit}) `
         }
 
         return `${amountUnit}${ingredient.name}`

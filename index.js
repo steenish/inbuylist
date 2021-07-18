@@ -66,14 +66,13 @@ const openRecipe = function() {
         .classed("recipePartHeader", true)
 
     recipePartHeaders
-        .append("p")
+        .append("h4")
         .classed("recipePartTitle", true)
-        .text(d => d.name)
+        .text(d => capitalizeFirstLetter(d.name.toLowerCase()))
         
     recipePartHeaders
-        .append("button")
-        .classed("addIngredientsButton", true)
-        .text("Lägg till")
+        .append("img")
+        .attr("src", "img/addIcon.svg")
         .on("click", addIngredients)
 
     // Append the list of ingredients for each recipe part.
@@ -150,4 +149,8 @@ const mergeIngredients = function(newIngredients) {
             shoppingList.push({name: newIngredient.name, amount: newIngredient.amount, unit: newIngredient.unit})
         }
     })
+}
+
+const capitalizeFirstLetter = function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

@@ -18,11 +18,11 @@ td {
     padding: 5px;
 }
 
-#recipeList li {
+.recipeList li {
     list-style-image: url("img/recipeIcon.svg");
 }
 
-#recipeList li:hover {
+.recipeList li:hover {
     color: royalblue;
     text-decoration: underline;
     cursor: pointer;

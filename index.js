@@ -1,5 +1,5 @@
-// Global data array of recipes.
-var recipes = []
+// Global data array of recipes per category.
+var recipeByCategory = []
 
 // Global data array of ingredients in the shopping list.
 var shoppingList = []
@@ -8,43 +8,80 @@ var shoppingList = []
 const unitConverter = {
     g: [
         { unit: "kg", lowerLimit: 1000 },
-        { unit: "g", lowerLimit: 1}
+        { unit: "g", lowerLimit: 1 }
     ],
     ml: [
-        { unit: "l", lowerLimit: 1000},
-        { unit: "dl", lowerLimit: 100},
-        { unit: "msk", lowerLimit: 15},
-        { unit: "tsk", lowerLimit: 5},
-        { unit: "krm", lowerLimit: 1}
+        { unit: "l", lowerLimit: 1000 },
+        { unit: "dl", lowerLimit: 100 },
+        { unit: "msk", lowerLimit: 15 },
+        { unit: "tsk", lowerLimit: 5 },
+        { unit: "krm", lowerLimit: 1 }
     ]
 }
 
-// Load the recipes from the JSON file and do the first update of the recipe list.
-d3.json("data.json", data => { recipes = data; updateRecipeList(); })
+// Load the recipes from the JSON file, pre-process the data and do the first update of the recipe list.
+d3.json("data.json", data => { preProcessData(data); updateRecipeList(); })
 
-// Add new recipes and remove the old ones, according to filtering.
-const updateRecipeList = function() {
-    let recipeList = d3.select("#recipeList");
-    let recipeUpdate = recipeList
-        .selectAll("li")
-        .data(recipes)
+// Map the recipes into their respective categories, and sort everything in alphanumeric order.
+const preProcessData = function (recipes) {
+    // Construct the temporary object mapping category to recipes.
+    let tempRecipeByCategory = {}
+    recipes.forEach(recipe => {
+        const category = recipe.category.toLowerCase()
+        if (!(category in tempRecipeByCategory)) {
+            tempRecipeByCategory[category] = []
+        }
+        tempRecipeByCategory[category].push(recipe)
+    });
+
+    // Sort recipes in each category.
+    Object.entries(tempRecipeByCategory).sort((a, b) => alphaOrder(a.name, b.name))
+
+    // Convert the recipeByCategory object into a mappable recipeByCategory array.
+    Object.entries(tempRecipeByCategory).forEach(element => recipeByCategory.push({ category: element[0], recipes: element[1] }))
+
+    // Sort the categories.
+    recipeByCategory.sort((a, b) => alphaOrder(a.category, b.category))
+}
+
+// Add new recipes.
+const updateRecipeList = function () {
+
+    // Do data join for the recipe categories.
+    let recipeUpdate = d3
+        .select("#recipes")
+        .selectAll(".recipeCategory")
+        .data(recipeByCategory)
 
     let recipeEnter = recipeUpdate
+        .enter()
+
+    // Create the title for the recipe category.
+    let recipeHeaders = recipeEnter
+        .append("div")
+        .classed("recipeCategory", true)
+
+    recipeHeaders
+        .append("h3")
+        .text(d => capitalizeFirstLetter(d.category.toLowerCase()))
+
+    // Append the list of ingredients for each recipe part.
+    recipeHeaders
+        .append("ul")
+        .classed("recipeList", true)
+        .selectAll("li")
+        .data(d => d.recipes)
         .enter()
         .append("li")
         .text(d => d.name)
         .on("click", openRecipe)
-
-    let recipeExit = recipeUpdate
-        .exit()
-        .remove()
 }
 
 // When a recipe is clicked, remove any old ingredients shown and show the new ones.
-const openRecipe = function() {
+const openRecipe = function () {
     // The data from the recipe.
     let recipe = d3.select(this).datum()
-    
+
     // Remove old ingredients.
     d3
         .select("#recipeIngredients")
@@ -69,7 +106,7 @@ const openRecipe = function() {
         .append("h4")
         .classed("recipePartTitle", true)
         .text(d => capitalizeFirstLetter(d.name.toLowerCase()))
-        
+
     recipePartHeaders
         .append("img")
         .attr("src", "img/addIcon.svg")
@@ -78,15 +115,15 @@ const openRecipe = function() {
     // Append the list of ingredients for each recipe part.
     recipePartHeaders
         .append("ul")
-            .classed("recipePart", true)
-            .selectAll("li")
-                .data(d => d.ingredients)
-                .enter()
-                .append("li")
-                .text(formatIngredient)
+        .classed("recipePart", true)
+        .selectAll("li")
+        .data(d => d.ingredients)
+        .enter()
+        .append("li")
+        .text(formatIngredient)
 }
 
-const addIngredients = function() {
+const addIngredients = function () {
     // The ingredients from the recipe part.
     let ingredients = d3.select(this).datum().ingredients
 
@@ -97,7 +134,7 @@ const addIngredients = function() {
     let shoppingListUpdate = d3
         .select("#shoppingList")
         .selectAll("li")
-        .data(shoppingList)
+        .data(shoppingList, d => d.name)
         .text(formatIngredient)
 
     let shoppingListEnter = shoppingListUpdate
@@ -106,12 +143,18 @@ const addIngredients = function() {
         .text(formatIngredient)
 }
 
-const formatIngredient = function(ingredient) {
+// Returns a well-formatted string representation of an ingredient object.
+const formatIngredient = function (ingredient) {
+    // If it is possible to convert the unit into something else.
     if (ingredient.unit in unitConverter) {
         let amountUnit = ""
         const units = unitConverter[ingredient.unit]
 
+        // Keep track of how much of the amount is left, and has not been converted.
         let currentAmount = ingredient.amount
+
+        // For each unit, in order of descending magnitude, see if the remaining amount fits into that magnitude
+        // then add the whole parts and subtract from the current amount.
         units.forEach(unit => {
             const fraction = currentAmount / unit.lowerLimit
             if (fraction >= 1) {
@@ -121,13 +164,8 @@ const formatIngredient = function(ingredient) {
             }
         });
 
-        if (currentAmount === ingredient.amount) {
-            amountUnit = `${ingredient.amount} ${ingredient.unit} `
-        } else {
-            console.log(ingredient)
-            console.log(currentAmount)
-            amountUnit += `(${ingredient.amount} ${ingredient.unit}) `
-        }
+        // Ddd the raw amount in parentheses after.
+        amountUnit += `(${ingredient.amount} ${ingredient.unit}) `
 
         return `${amountUnit}${ingredient.name}`
     } else {
@@ -135,22 +173,39 @@ const formatIngredient = function(ingredient) {
     }
 }
 
-const mergeIngredients = function(newIngredients) {
+// Merges the new ingredients into the shopping list gracefully.
+const mergeIngredients = function (newIngredients) {
     newIngredients.forEach(newIngredient => {
         let neverFound = true
-        shoppingList.forEach(oldIngredient => {
-            if (neverFound && newIngredient.name === oldIngredient.name && newIngredient.unit === oldIngredient.unit) {
+
+        // Check through the ingredients of the shopping list.
+        for (oldIngredient of shoppingList) {
+            // If the name and unit match, merge in the new ingredient and stop searching.
+            if (newIngredient.name === oldIngredient.name && newIngredient.unit === oldIngredient.unit) {
                 oldIngredient.amount += newIngredient.amount
                 neverFound = false
+                break;
             }
-        })
+        }
 
+        // If no match was found in the shopping list, add the ingredient to the shopping list.
         if (neverFound) {
-            shoppingList.push({name: newIngredient.name, amount: newIngredient.amount, unit: newIngredient.unit})
+            shoppingList.push({ name: newIngredient.name, amount: newIngredient.amount, unit: newIngredient.unit })
         }
     })
 }
 
-const capitalizeFirstLetter = function(string) {
+// Sort comparison function for alphanumeric ordering.
+const alphaOrder = function (a, b) {
+    if (a < b) {
+        return -1;
+    } else if (a > b) {
+        return 1
+    } else {
+        return 0;
+    }
+}
+
+const capitalizeFirstLetter = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

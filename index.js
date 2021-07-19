@@ -4,6 +4,11 @@ var recipeByCategory = []
 // Global data array of ingredients in the shopping list.
 var shoppingList = []
 
+// String representing the html for the ingredient controls.
+const ingredientControls = '<button id="remove100" class="removeButton ingredientButton" onclick="onIngredientConrolClick(-100)">-100</button><button id="remove10" class="removeButton ingredientButton" onclick="onIngredientConrolClick(-10)">-10</button><button id="remove1" class="removeButton ingredientButton" onclick="onIngredientConrolClick(-1)">-1</button><button id="add1" class="addButton ingredientButton" onclick="onIngredientConrolClick(1)">+1</button><button id="add10" class="addButton ingredientButton" onclick="onIngredientConrolClick(10)">+10</button><button id="add100" class="addButton ingredientButton" onclick="onIngredientConrolClick(100)">+100</button>';
+
+var selectedIngredient = null;
+
 // Global unit conversion table.
 const unitConverter = {
     g: [
@@ -130,17 +135,27 @@ const addIngredients = function () {
     // Merge the new ingredients into the existing shopping list.
     mergeIngredients(ingredients)
 
-    // Update the visuals.
+    updateIngredients();
+}
+
+// Update the visuals of the shopping list.
+const updateIngredients = function () {
     let shoppingListUpdate = d3
         .select("#shoppingList")
         .selectAll("li")
-        .data(shoppingList, d => d.name)
+        .data(shoppingList)
         .text(formatIngredient)
 
-    let shoppingListEnter = shoppingListUpdate
+    shoppingListUpdate
         .enter()
         .append("li")
         .text(formatIngredient)
+        .on("mouseenter", showIngredientControls)
+        .on("mouseleave", hideIngredientControls)
+
+    shoppingListUpdate
+        .exit()
+        .remove()
 }
 
 // Returns a well-formatted string representation of an ingredient object.
@@ -208,4 +223,39 @@ const alphaOrder = function (a, b) {
 
 const capitalizeFirstLetter = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const showIngredientControls = function (d) {
+    d3
+        .select(this)
+        .classed("selectedIngredient", true)
+    
+    selectedIngredient = d3
+        .select(this)
+        .append("span")
+        .html(ingredientControls)
+        .datum()
+
+}
+
+const hideIngredientControls = function (d) {
+    d3
+    .select(this)
+    .classed("selectedIngredient", false)
+
+    d3
+        .select(this)
+        .select("span")
+        .remove()
+        
+    selectedIngredient = null
+}
+
+// Adds the amount to the selected ingredient, removing the ingredient if the amount falls below 1 and updating the shopping list visuals.
+const onIngredientConrolClick = function (amount) {
+    selectedIngredient.amount = selectedIngredient.amount + amount
+    if (selectedIngredient.amount <= 0) {
+        shoppingList = shoppingList.filter(ingredient => !(ingredient.name === selectedIngredient.name && ingredient.amount === ingredient.amount))
+    }
+    updateIngredients()
 }

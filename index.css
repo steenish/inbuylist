@@ -45,3 +45,33 @@ ul {
     cursor: pointer;
     content:url("img/addIconWhite.svg");
 }
+
+li span {
+    position: absolute;
+}
+
+.ingredientButton {
+    cursor: pointer;
+    height: 20px;
+}
+
+.removeButton {
+    background-color: tomato;
+}
+
+.addButton {
+    background-color: yellowgreen;
+}
+
+#shoppingList {
+    position: relative;
+}
+
+#shoppingList li span {
+    position: absolute;
+    right: 1px;
+}
+
+.selectedIngredient {
+    background-color: cornflowerblue;
+}

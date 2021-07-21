@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inbuylist</title>
+    <link rel="stylesheet" href="adder.css">
+    <script src="d3.v4.js"></script>
+</head>
+
+<body>
+    <form method="POST">
+        <label for="recipeName">Receptnamn:</label>
+        <input name="recipeName" type="text">
+        <label for="category">Kategori:</label>
+        <input name="category" type="text">
+        <hr>
+        <div id="recipeParts">
+            <p>Receptdelar:</p>
+            <div class="recipePart">
+                <label>Receptdelsnamn:</label>
+                <input name="recipePartName" type="text">
+                <p>Ingredienser:</p>
+                <div class="ingredientList">
+                    <div class="ingredient">
+                        <label for="ingredientName">Ingrediensnamn:</label>
+                        <input name="ingredientName" type="text">
+                        <label for="ingredientAmount">Mängd:</label>
+                        <input name="ingredientAmount" type="text">
+                        <label for="ingredientUnit">Enhet:</label>
+                        <select>
+                            <option>ml</option>
+                            <option>g</option>
+                            <option>st</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button>Lägg till receptdel</button>
+        </div>
+        <hr>
+        <input type="submit" value="Färdigställ recept">
+    </form>
+
+    <script src="adder.js"></script>
+</body>
+
+</html>

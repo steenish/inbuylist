@@ -1,0 +1,13 @@
+#recipeParts {
+    margin: 20px;
+}
+
+.recipePart {
+    margin: 20px;
+    border: 1px black solid;
+    padding: 10px;
+}
+
+.ingredientList {
+    margin-left: 20px;
+}

@@ -18,7 +18,7 @@
             <p>Receptdelar:</p>
             <div class="recipePart">
                 <label>Receptdelsnamn:</label>
-                <input name="recipePartName" type="text">
+                <input class="recipePartName" name="recipePartName" type="text">
                 <p>Ingredienser:</p>
                 <div class="ingredientList">
                     <div class="ingredient">
@@ -27,15 +27,16 @@
                         <label for="ingredientAmount">Mängd:</label>
                         <input name="ingredientAmount" type="text">
                         <label for="ingredientUnit">Enhet:</label>
-                        <select>
+                        <select name="ingredientUnit">
                             <option>ml</option>
                             <option>g</option>
                             <option>st</option>
                         </select>
                     </div>
+                    <button class="addIngredientButton" onclick="addIngredient(this.parentNode)">Lägg till ingrediens</button>
                 </div>
             </div>
-            <button>Lägg till receptdel</button>
+            <button id="addRecipePartButton" onclick="addRecipePart()">Lägg till receptdel</button>
         </div>
         <hr>
         <input type="submit" value="Färdigställ recept">

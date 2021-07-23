@@ -229,7 +229,7 @@ const showIngredientControls = function (d) {
     d3
         .select(this)
         .classed("selectedIngredient", true)
-    
+
     selectedIngredient = d3
         .select(this)
         .append("span")
@@ -240,14 +240,14 @@ const showIngredientControls = function (d) {
 
 const hideIngredientControls = function (d) {
     d3
-    .select(this)
-    .classed("selectedIngredient", false)
+        .select(this)
+        .classed("selectedIngredient", false)
 
     d3
         .select(this)
         .select("span")
         .remove()
-        
+
     selectedIngredient = null
 }
 

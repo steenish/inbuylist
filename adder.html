@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form method="POST">
+    <form id="form" method="POST">
         <label for="recipeName">Receptnamn:</label>
         <input name="recipeName" type="text">
         <label for="category">Kategori:</label>
@@ -33,10 +33,11 @@
                             <option>st</option>
                         </select>
                     </div>
-                    <button class="addIngredientButton" onclick="addIngredient(this.parentNode)">Lägg till ingrediens</button>
+                    <button class="addIngredientButton" type="button" onclick="addIngredient(this.parentNode)">Lägg till
+                        ingrediens</button>
                 </div>
             </div>
-            <button id="addRecipePartButton" onclick="addRecipePart()">Lägg till receptdel</button>
+            <button id="addRecipePartButton" type="button" onclick="addRecipePart()">Lägg till receptdel</button>
         </div>
         <hr>
         <input type="submit" value="Färdigställ recept">

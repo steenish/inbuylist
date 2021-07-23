@@ -2,23 +2,81 @@
     {
         "name": "Köttbulle Diamant",
         "category": "kött",
-        "ingredients":
-        [
+        "ingredients": [
             {
                 "name": "bas",
-                "ingredients":
-                [
-                    {"name": "köttbullar", "amount": 10, "unit": "st"},
-                    {"name": "diamanter", "amount": 500, "unit": "g"},
-                    {"name": "humor", "amount": 3, "unit": "ml"}
+                "ingredients": [
+                    {
+                        "name": "köttbullar",
+                        "amount": 10,
+                        "unit": "st"
+                    },
+                    {
+                        "name": "diamanter",
+                        "amount": 500,
+                        "unit": "g"
+                    },
+                    {
+                        "name": "humor",
+                        "amount": 3,
+                        "unit": "ml"
+                    }
                 ]
             },
             {
                 "name": "variant 1",
-                "ingredients":
-                [
-                    {"name": "tjuvar", "amount": 2, "unit": "st"},
-                    {"name": "poliser", "amount": 5, "unit": "st"}
+                "ingredients": [
+                    {
+                        "name": "tjuvar",
+                        "amount": 2,
+                        "unit": "st"
+                    },
+                    {
+                        "name": "poliser",
+                        "amount": 5,
+                        "unit": "st"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Poopcake",
+        "category": "tårta",
+        "ingredients": [
+            {
+                "name": "bas",
+                "ingredients": [
+                    {
+                        "name": "poop",
+                        "amount": 1,
+                        "unit": "g"
+                    },
+                    {
+                        "name": "mjöl",
+                        "amount": 100,
+                        "unit": "g"
+                    }
+                ]
+            },
+            {
+                "name": "dekoration",
+                "ingredients": [
+                    {
+                        "name": "sprinkels",
+                        "amount": 100,
+                        "unit": "ml"
+                    }
+                ]
+            },
+            {
+                "name": "dekoration 2",
+                "ingredients": [
+                    {
+                        "name": "jordgubbar",
+                        "amount": 500,
+                        "unit": "g"
+                    }
                 ]
             }
         ]

@@ -11,7 +11,7 @@ var ingredientSource = `
 <label for="ingredientName">Ingrediensnamn:</label>
 <input name="ingredientName" type="text">
 <label for="ingredientAmount">Mängd:</label>
-<input name="ingredientAmount" type="number">
+<input name="ingredientAmount" type="number" step="0.01">
 <label for="ingredientUnit">Enhet:</label>
 <select>
 <option>ml</option>

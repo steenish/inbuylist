@@ -41,47 +41,6 @@
         ]
     },
     {
-        "name": "Poopcake",
-        "category": "tårta",
-        "ingredients": [
-            {
-                "name": "bas",
-                "ingredients": [
-                    {
-                        "name": "poop",
-                        "amount": 1,
-                        "unit": "g"
-                    },
-                    {
-                        "name": "mjöl",
-                        "amount": 100,
-                        "unit": "g"
-                    }
-                ]
-            },
-            {
-                "name": "dekoration",
-                "ingredients": [
-                    {
-                        "name": "sprinkels",
-                        "amount": 100,
-                        "unit": "ml"
-                    }
-                ]
-            },
-            {
-                "name": "dekoration 2",
-                "ingredients": [
-                    {
-                        "name": "jordgubbar",
-                        "amount": 500,
-                        "unit": "g"
-                    }
-                ]
-            }
-        ]
-    },
-    {
     "name": "Färsk inlagd gurka",
     "category": "grundläggande recept",
     "ingredients": [

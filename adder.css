@@ -1,3 +1,5 @@
+/* Icons from here: https://fonts.google.com/icons?selected=Material+Icons */
+
 #recipeParts {
     margin: 20px;
 }
@@ -6,6 +8,21 @@
     margin: 20px;
     border: 1px black solid;
     padding: 10px;
+    position: relative;
+}
+
+.recipePart > img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    vertical-align: middle;
+}
+
+.recipePart img:hover {
+    background-color: royalblue;
+    border-radius: 3px;
+    cursor: pointer;
+    content:url("img/deleteWhite.svg");
 }
 
 .ingredientList {
@@ -14,4 +31,15 @@
 
 .ingredient {
     margin: 5px;
+}
+
+.ingredient img {
+    vertical-align: middle;
+}
+
+.ingredient img:hover {
+    background-color: royalblue;
+    border-radius: 3px;
+    cursor: pointer;
+    content:url("img/removeWhite.svg");
 }

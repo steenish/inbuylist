@@ -4,19 +4,21 @@ var recipePartSource = `
 <p>Ingredienser:</p>
 <div class="ingredientList">
 <button class="addIngredientButton" type="button" onclick="addIngredient(this.parentNode)">Lägg till ingrediens</button>
-</div>`
+</div>
+<img src="img/deleteBlack.svg" onclick="removeNode(this.parentNode)">`
 
 var ingredientSource = `
 <label for="ingredientName">Ingrediensnamn:</label>
 <input name="ingredientName" type="text">
 <label for="ingredientAmount">Mängd:</label>
-<input name="ingredientAmount" type="text">
+<input name="ingredientAmount" type="number">
 <label for="ingredientUnit">Enhet:</label>
 <select>
 <option>ml</option>
 <option>g</option>
 <option>st</option>
-</select>`
+</select>
+<img src="img/removeBlack.svg" onclick="removeNode(this.parentNode)">`
 
 document.forms[0].addEventListener("submit", function (event) {
     event.preventDefault()
@@ -83,4 +85,8 @@ const focusFirst = function (selection, selectString) {
         .filter((_, i) => i == 0)
         .node()
         .focus()
+}
+
+const removeNode = function (node) {
+    node.parentNode.removeChild(node)
 }

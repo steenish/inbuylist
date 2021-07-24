@@ -11,6 +11,10 @@ table {
     border-collapse: collapse;
 }
 
+img {
+    vertical-align: middle;
+}
+
 td {
     vertical-align: top;
     width: 33%;

@@ -41,44 +41,44 @@
         ]
     },
     {
-    "name": "Färsk inlagd gurka",
-    "category": "grundläggande recept",
-    "ingredients": [
-        {
-            "name": "bas",
-            "ingredients": [
-                {
-                    "name": "gurka",
-                    "amount": 1,
-                    "unit": "st"
-                },
-                {
-                    "name": "ättiksprit (12%)",
-                    "amount": 30,
-                    "unit": "ml"
-                },
-                {
-                    "name": "strösocker",
-                    "amount": 30,
-                    "unit": "ml"
-                },
-                {
-                    "name": "salt",
-                    "amount": 3,
-                    "unit": "ml"
-                },
-                {
-                    "name": "vitpeppar",
-                    "amount": 0.5,
-                    "unit": "ml"
-                },
-                {
-                    "name": "färsk persilja",
-                    "amount": 1,
-                    "unit": "st"
-                }
-            ]
-        }
-    ]
-}
+        "name": "Färsk inlagd gurka",
+        "category": "grundläggande recept",
+        "ingredients": [
+            {
+                "name": "bas",
+                "ingredients": [
+                    {
+                        "name": "gurka",
+                        "amount": 1,
+                        "unit": "st"
+                    },
+                    {
+                        "name": "ättiksprit (12%)",
+                        "amount": 30,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "strösocker",
+                        "amount": 30,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "salt",
+                        "amount": 3,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "vitpeppar",
+                        "amount": 0.5,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "färsk persilja",
+                        "amount": 1,
+                        "unit": "st"
+                    }
+                ]
+            }
+        ]
+    }
 ]

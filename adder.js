@@ -39,7 +39,7 @@ document.forms[0].addEventListener("submit", function (event) {
             let ingredientInputs = ingredientElement.getElementsByTagName("input")
             recipePart.ingredients.push({
                 name: ingredientInputs[0].value.toLowerCase(),
-                amount: parseInt(ingredientInputs[1].value),
+                amount: parseFloat(ingredientInputs[1].value),
                 unit: ingredientElement.getElementsByTagName("select")[0].value
             })
         }

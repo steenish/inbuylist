@@ -80,5 +80,46 @@
                 ]
             }
         ]
+    },
+    {
+        "name": "Pizzadeg",
+        "category": "pizza",
+        "ingredients": [
+            {
+                "name": "bas",
+                "ingredients": [
+                    {
+                        "name": "ljummet vatten",
+                        "amount": 530,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "socker",
+                        "amount": 15,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "torrjäst",
+                        "amount": 5,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "olivolja",
+                        "amount": 30,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "salt",
+                        "amount": 15,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "vetemjöl",
+                        "amount": 600,
+                        "unit": "g"
+                    }
+                ]
+            }
+        ]
     }
 ]

@@ -121,5 +121,66 @@
                 ]
             }
         ]
+    },
+    {
+        "name": "Anders Tomatsoppa",
+        "category": "soppor",
+        "ingredients": [
+            {
+                "name": "bas",
+                "ingredients": [
+                    {
+                        "name": "hjulmakaroner",
+                        "amount": 300,
+                        "unit": "g"
+                    },
+                    {
+                        "name": "vitlöksklyfta",
+                        "amount": 1,
+                        "unit": "st"
+                    },
+                    {
+                        "name": "olivolja",
+                        "amount": 30,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "passerade tomater",
+                        "amount": 500,
+                        "unit": "g"
+                    },
+                    {
+                        "name": "vatten",
+                        "amount": 500,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "grönsaksbuljongtärning",
+                        "amount": 2,
+                        "unit": "st"
+                    },
+                    {
+                        "name": "tomatpuré",
+                        "amount": 30,
+                        "unit": "ml"
+                    },
+                    {
+                        "name": "cayennepeppar",
+                        "amount": 10,
+                        "unit": "ml"
+                    }
+                ]
+            },
+            {
+                "name": "servering",
+                "ingredients": [
+                    {
+                        "name": "örtcrème-fraiche",
+                        "amount": 200,
+                        "unit": "ml"
+                    }
+                ]
+            }
+        ]
     }
 ]
